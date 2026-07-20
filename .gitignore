@@ -3,6 +3,7 @@
 *.pdb
 *.ilk
 *.log
+*.user
 .vs/
 build/
 Debug/
