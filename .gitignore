@@ -1,0 +1,10 @@
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.log
+.vs/
+build/
+Debug/
+Release/
+.cph/
