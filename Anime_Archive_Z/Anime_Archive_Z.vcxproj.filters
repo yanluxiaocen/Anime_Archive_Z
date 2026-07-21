@@ -21,9 +21,15 @@
     <ClCompile Include="Anime.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AnimeStore.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anime.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimeStore.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
