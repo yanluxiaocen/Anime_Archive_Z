@@ -18,5 +18,13 @@
     <ClCompile Include="Anime_Archive_Z.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Anime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Anime.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
