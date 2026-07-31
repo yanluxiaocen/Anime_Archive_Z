@@ -19,5 +19,3 @@ public:
 	void setRate(float rate);
 	void print() const;
 };
-
-

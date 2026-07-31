@@ -13,6 +13,7 @@ private:
 
 public:
 	AnimeStore(const std::string &filename);
+	~AnimeStore();
 
 	void add(const Anime &anime);
 	bool remove(int index);

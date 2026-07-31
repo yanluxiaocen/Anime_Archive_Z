@@ -15,7 +15,7 @@ void AnimeStore::add(const Anime &anime)
 
 bool AnimeStore::remove(int index)
 {
-    if (index < 0 && index > static_cast<int>(m_animes.size()))
+    if (index < 0 || index > static_cast<int>(m_animes.size()))
         return false;
 
     m_animes.erase(m_animes.begin() + index);
@@ -28,11 +28,7 @@ void AnimeStore::showAll() const
     using std::endl;
     for (const auto &anime : m_animes)
     {
-        cout << "【" << anime.getName() << "】"
-             << " 作者：" << anime.getAuthor()
-             << " 评分：" << anime.getRate() << endl;
-        cout << "  介绍：" << anime.getDescription() << endl;
-        cout << "------------------------" << endl;
+        anime.print();
     }
 }
 
@@ -52,7 +48,7 @@ void AnimeStore::showRank() const
 
 void AnimeStore::loadFromFile()
 {
-    std::ifstream fin("anime.txt");
+    std::ifstream fin(m_filename);
     if (!fin.is_open())
         return;
 
@@ -70,7 +66,7 @@ void AnimeStore::loadFromFile()
 
 void AnimeStore::saveToFile() const
 {
-    std::ofstream fout("anime.txt");
+    std::ofstream fout(m_filename);
     if (!fout.is_open())
         return;
     for (const auto &anime : m_animes)
@@ -80,4 +76,8 @@ void AnimeStore::saveToFile() const
              << anime.getDescription() << "\n"
              << anime.getRate() << "\n";
     }
+}
+
+AnimeStore::~AnimeStore(){
+    saveToFile();
 }

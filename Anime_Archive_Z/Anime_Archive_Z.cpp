@@ -1,17 +1,22 @@
-﻿#include <iostream>
-#include "Anime.h"
-#include <string>
+﻿#include "UI.h"
+#include"AnimeStore.h"
+#include <windows.h>
 #include <iostream>
+#include <string>
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    std::cout << "Hello World!!\n";
-    std::cout << "Hello World!!!\n";
-    std::cout << "Hello World!!!!\n";
-    std::cout << "Fuck World!!!!!!\n";
+    system("chcp 65001 > nul");
+    AnimeStore store("Anime.txt");
     Anime test("undertale", "tobyfox", "very good", 9.9);
-    test.print();
-    getchar();
+    store.add(test);
+    int choice;
+    do
+    {
+        showMenu();
+        std::cin >> choice;
+        handleChoice(store, choice);
+    } while (choice < 6 || choice > 0);
+
     getchar();
 }
