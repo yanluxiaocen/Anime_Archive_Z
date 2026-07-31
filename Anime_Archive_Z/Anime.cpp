@@ -34,7 +34,7 @@ void Anime::setRate(float rate)
 		m_rate = rate;
 	else
 	{
-		std::cout << "É¶±­£¬¿´²»¶®ÈË»°Ã´£¿" << std::endl;
+		std::cout << "å•¥æ¯ï¼Œçœ‹ä¸æ‡‚äººè¯ä¹ˆï¼Ÿ" << std::endl;
 		m_rate = 0.0f;
 	}
 }
@@ -43,9 +43,9 @@ void Anime::print() const
 {
 	using std::cout;
 	using std::endl;
-	cout << "¡¾" << m_name << "¡¿"
-		 << " ×÷Õß£º" << m_author
-		 << " ÆÀ¼Û£º" << m_rate << endl;
-	cout << "½éÉÜ£º" << m_description << endl;
+	cout << "ã€" << m_name << "ã€‘"
+		 << " ä½œè€…ï¼š" << m_author
+		 << " è¯„ä»·ï¼š" << m_rate << endl;
+	cout << "ä»‹ç»ï¼š" << m_description << endl;
 	cout << "------------------------" << endl;
 }
