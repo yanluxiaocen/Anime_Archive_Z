@@ -5,7 +5,7 @@ using namespace std;
 
 void showMenu()
 {
-    cout << "        番剧收藏馆Z" << endl;
+    cout << "           番剧收藏馆Z" << endl;
     cout << "1.番剧列表               2.番剧排行" << endl;
 }
 
