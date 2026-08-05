@@ -45,7 +45,7 @@ void Anime::print() const
 	using std::endl;
 	cout << "【" << m_name << "】"
 		 << " 作者：" << m_author
-		 << " 评价：" << m_rate << endl;
-	cout << "介绍：" << m_description << endl;
+		 << " 评分：" << m_rate << endl;
+	cout << "评论：" << m_description << endl;
 	cout << "------------------------" << endl;
 }

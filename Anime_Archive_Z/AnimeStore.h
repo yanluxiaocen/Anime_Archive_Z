@@ -15,7 +15,7 @@ public:
 	AnimeStore(const std::string &filename);
 	~AnimeStore();
 
-	void add(const Anime &anime);
+	void add();
 	bool remove(int index);
 	void showAll() const;
 	void showRank() const;

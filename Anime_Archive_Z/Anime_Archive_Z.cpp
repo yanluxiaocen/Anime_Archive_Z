@@ -7,14 +7,15 @@
 int main()
 {
     system("chcp 65001 > nul");
+
     AnimeStore store("Anime.txt");
-    Anime test("undertale", "tobyfox", "very good", 9.9);
-    store.add(test);
+    
     int choice;
     do
     {
         showMenu();
         std::cin >> choice;
+        getchar();
         handleChoice(store, choice);
     } while (choice < 6 || choice > 0);
 

@@ -8,9 +8,25 @@ AnimeStore::AnimeStore(const std::string &filename) : m_filename(filename)
     loadFromFile();
 }
 
-void AnimeStore::add(const Anime &anime)
+void AnimeStore::add()
 {
-    m_animes.push_back(anime);
+    using std::cin;
+    using std::cout;
+    using std::getline;
+    std::string name, author, description;
+    float rate;
+    cout << "名字：\n";
+    getline(cin, name);
+    cout << "作者：\n";
+    getline(cin, author);
+    cout << "评分：\n";
+    cin >> rate;
+    getchar();
+    cout << "评论：\n";
+    getline(cin, description);
+
+    m_animes.push_back(Anime(name, author, description, rate));
+    cout << "成功\n";
 }
 
 bool AnimeStore::remove(int index)
@@ -78,6 +94,7 @@ void AnimeStore::saveToFile() const
     }
 }
 
-AnimeStore::~AnimeStore(){
+AnimeStore::~AnimeStore()
+{
     saveToFile();
 }

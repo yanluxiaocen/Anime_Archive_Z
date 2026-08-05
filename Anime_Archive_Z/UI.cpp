@@ -5,8 +5,9 @@ using namespace std;
 
 void showMenu()
 {
-    cout << "           番剧收藏馆Z" << endl;
-    cout << "1.番剧列表               2.番剧排行" << endl;
+    cout << "           动漫收藏馆Z" << endl;
+    cout << "1.动漫列表               2.动漫排行" << endl;
+    cout << "3.动漫添加               4.动漫删除" << endl;
 }
 
 void handleChoice(AnimeStore &store, int choice)
@@ -19,6 +20,13 @@ void handleChoice(AnimeStore &store, int choice)
     case 2:
         store.showRank();
         break;
+    case 3:
+        store.add();
+        break;
+    case 4:
+        int index;
+        cin >> index;
+        store.remove(index - 1);
     default:
         cout << "你吗";
     }
