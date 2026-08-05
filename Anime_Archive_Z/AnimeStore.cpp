@@ -15,6 +15,7 @@ void AnimeStore::add()
     using std::getline;
     std::string name, author, description;
     float rate;
+    getchar();
     cout << "名字：\n";
     getline(cin, name);
     cout << "作者：\n";
