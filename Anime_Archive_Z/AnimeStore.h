@@ -14,10 +14,12 @@ private:
 public:
 	AnimeStore(const std::string &filename);
 	~AnimeStore();
+	int getCount() const;
 
 	void add();
-	bool remove(int index);
+	void remove(int index);
 	void showAll() const;
+	void showSimple() const;
 	void showRank() const;
 
 	void saveToFile() const;

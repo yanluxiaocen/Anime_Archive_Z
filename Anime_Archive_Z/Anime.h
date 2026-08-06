@@ -18,4 +18,5 @@ public:
 	float getRate() const;
 	void setRate(float rate);
 	void print() const;
+	void printSimple() const;
 };

@@ -49,3 +49,10 @@ void Anime::print() const
 	cout << "评论：" << m_description << endl;
 	cout << "------------------------" << endl;
 }
+
+void Anime::printSimple() const
+{
+	std::cout << "【" << m_name << "】"
+			  << " 作者：" << m_author
+			  << " 评分：" << m_rate << std::endl;
+}

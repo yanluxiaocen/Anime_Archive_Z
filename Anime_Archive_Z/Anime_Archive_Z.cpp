@@ -8,6 +8,7 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
+
     AnimeStore store("Anime.txt");
 
     int choice;
@@ -15,9 +16,9 @@ int main()
     {
         showMenu();
         std::cin >> choice;
+        clearScreen();
         handleChoice(store, choice);
-        getchar();
-    } while (choice < 6 || choice > 0);
+    } while (choice != 0);
 
-    getchar();
+    return 0;
 }

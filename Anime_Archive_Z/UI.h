@@ -3,3 +3,4 @@
 
 void showMenu();
 void handleChoice(AnimeStore &store, int choice);
+void clearScreen();
