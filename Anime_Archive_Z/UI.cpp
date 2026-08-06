@@ -27,6 +27,7 @@ void handleChoice(AnimeStore &store, int choice)
         int index;
         cin >> index;
         store.remove(index - 1);
+        break;
     default:
         cout << "你吗";
     }

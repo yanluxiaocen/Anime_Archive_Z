@@ -8,5 +8,8 @@
         "**/Debug/": true,
         "**/Release/": true,
         "**/*.exe": true
+    },
+    "terminal.integrated.env.windows": {
+        
     }
 }

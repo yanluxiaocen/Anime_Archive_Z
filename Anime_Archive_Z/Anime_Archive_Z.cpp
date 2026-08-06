@@ -1,4 +1,4 @@
-﻿#include "UI.h"
+#include "UI.h"
 #include "AnimeStore.h"
 #include <windows.h>
 #include <iostream>
@@ -6,8 +6,8 @@
 
 int main()
 {
-    system("chcp 65001 > nul");
-
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     AnimeStore store("Anime.txt");
 
     int choice;
