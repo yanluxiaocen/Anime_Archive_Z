@@ -8,6 +8,8 @@ void showMenu()
     cout << "           动漫收藏馆Z" << endl;
     cout << "1.动漫列表               2.动漫排行" << endl;
     cout << "3.动漫添加               4.动漫删除" << endl;
+    cout << "5.手动备份               6.重置馆藏" << endl;
+    cout << "———————————————————————————————————" << endl;
 }
 
 void handleChoice(AnimeStore &store, int choice)
@@ -55,11 +57,12 @@ void handleChoice(AnimeStore &store, int choice)
                 continue;
             }
 
-            if (index == 0){
+            if (index == 0)
+            {
                 clearScreen();
                 return;
             }
-                
+
             cin.ignore();
             if (index >= 1 && index <= store.getCount())
             {
@@ -76,6 +79,10 @@ void handleChoice(AnimeStore &store, int choice)
         clearScreen();
         break;
     }
+    case 5:
+        store.saveToFile();
+        clearScreen();
+        break;
 
     default:
         cout << "啥杯";
