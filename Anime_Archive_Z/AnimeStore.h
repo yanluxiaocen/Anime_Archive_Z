@@ -12,8 +12,7 @@ private:
 	std::string m_filename;
 
 public:
-	AnimeStore(const std::string &filename);
-	~AnimeStore();
+	AnimeStore(const std::string& filename);
 	int getCount() const;
 
 	void add();
@@ -22,6 +21,7 @@ public:
 	void showSimple() const;
 	void showRank() const;
 
-	void saveToFile() const;
+	bool saveToFile() const;
+	bool backup() const;
 	void loadFromFile();
 };

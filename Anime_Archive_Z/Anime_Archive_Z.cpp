@@ -1,4 +1,4 @@
-#include "UI.h"
+﻿#include "UI.h"
 #include "AnimeStore.h"
 #include <windows.h>
 #include <iostream>
@@ -6,19 +6,28 @@
 
 int main()
 {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
+	SetConsoleOutputCP(CP_UTF8);
+	SetConsoleCP(CP_UTF8);
 
-    AnimeStore store("Anime.txt");
+	AnimeStore store("Anime.txt");
 
-    int choice;
-    do
-    {
-        showMenu();
-        std::cin >> choice;
-        clearScreen();
-        handleChoice(store, choice);
-    } while (choice != 0);
+	int choice = 0;
+	while (true)
+	{
+		showMenu();
+		if (!(std::cin >> choice))
+		{
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			clearScreen();
+			continue;
+		}
+		clearScreen();
+		handleChoice(store, choice);
+		if (choice == 0)
+			break;
+	}
 
-    return 0;
+	store.saveToFile();
+	return 0;
 }

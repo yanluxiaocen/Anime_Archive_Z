@@ -1,4 +1,4 @@
-Tasks: Run Build Task<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,7 +21,7 @@ Tasks: Run Build Task<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5a905681-767c-41d9-bb44-29e3578f8395}</ProjectGuid>
+    <ProjectGuid>{baf92111-fcd5-4cfe-98d0-6f8247a15067}</ProjectGuid>
     <RootNamespace>AnimeArchiveZ</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -102,6 +102,7 @@ Tasks: Run Build Task<?xml version="1.0" encoding="utf-8"?>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,10 +127,12 @@ Tasks: Run Build Task<?xml version="1.0" encoding="utf-8"?>
     <ClCompile Include="Anime.cpp" />
     <ClCompile Include="AnimeStore.cpp" />
     <ClCompile Include="Anime_Archive_Z.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anime.h" />
     <ClInclude Include="AnimeStore.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
