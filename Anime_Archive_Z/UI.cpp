@@ -1,4 +1,4 @@
-#include "UI.h"
+﻿#include "UI.h"
 #include <iostream>
 
 using namespace std;
@@ -85,10 +85,10 @@ void handleChoice(AnimeStore& store, int choice)
 		break;
 
 	default:
-		cout << "啥杯";
+		cout << "无效，重来" << endl;
+		cin.get();
 		clearScreen();
 		break;
-		std::cin.ignore();
 	}
 }
 

@@ -1,4 +1,4 @@
-#include "AnimeStore.h"
+﻿#include "AnimeStore.h"
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -25,9 +25,21 @@ void AnimeStore::add()
 	getline(cin, name);
 	cout << "作者：";
 	getline(cin, author);
-	cout << "评分：";
-	cin >> rate;
-	std::cin.ignore();
+	while (true) {
+		cout << "评分：";
+		cin >> rate;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "无效，重来" << std::endl;
+			continue;
+		}
+		cin.ignore();
+		if (rate >= 0.0f && rate <= 10.0f)
+			break;
+		cout << "范围错误，重来" << std::endl;
+	}
 	cout << "评论：";
 	getline(cin, description);
 
