@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 int main()
 {
@@ -11,20 +12,22 @@ int main()
 
 	AnimeStore store("Anime.txt");
 
-	int choice = 0;
 	while (true)
 	{
 		showMenu();
-		if (!(std::cin >> choice))
+		std::string line;
+		std::getline(std::cin, line);
+		std::istringstream iss(line);
+		int raw;
+		if (!(iss >> raw) || !(iss >> std::ws).eof())
 		{
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
 			clearScreen();
 			continue;
 		}
+		MenuChoice choice = static_cast<MenuChoice>(raw);
 		clearScreen();
 		handleChoice(store, choice);
-		if (choice == 0)
+		if (choice == MenuChoice::Exit)
 			break;
 	}
 

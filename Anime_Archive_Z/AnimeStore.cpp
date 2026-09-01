@@ -52,6 +52,10 @@ void AnimeStore::remove(int index)
 	m_animes.erase(m_animes.begin() + index);
 }
 
+void AnimeStore::reset() {
+	m_animes.clear();
+}
+
 void AnimeStore::showAll() const
 {
 	using std::cout;

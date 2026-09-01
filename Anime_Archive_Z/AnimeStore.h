@@ -1,9 +1,7 @@
-#pragma once
+﻿#pragma once
 #include "Anime.h"
-#include <iostream>
 #include <string>
-#include <algorithm>
-#include <fstream>
+#include<vector>
 
 class AnimeStore
 {
@@ -17,6 +15,7 @@ public:
 
 	void add();
 	void remove(int index);
+	void reset();
 	void showAll() const;
 	void showSimple() const;
 	void showRank() const;

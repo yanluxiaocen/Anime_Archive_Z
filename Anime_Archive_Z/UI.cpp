@@ -12,24 +12,23 @@ void showMenu()
 	cout << "———————————————————————————————————" << endl;
 }
 
-void handleChoice(AnimeStore& store, int choice)
+void handleChoice(AnimeStore& store, MenuChoice choice)
 {
-	cin.ignore();
 	switch (choice)
 	{
-	case 0:
+	case MenuChoice::Exit:
 		break;
-	case 1:
+	case MenuChoice::List:
 		store.showAll();
 		cin.get();
 		clearScreen();
 		break;
-	case 2:
+	case MenuChoice::Rank:
 		store.showRank();
 		cin.get();
 		clearScreen();
 		break;
-	case 3:
+	case MenuChoice::Add:
 		store.add();
 		cin.get();
 		clearScreen();
@@ -37,7 +36,7 @@ void handleChoice(AnimeStore& store, int choice)
 		cin.get();
 		clearScreen();
 		break;
-	case 4:
+	case MenuChoice::Remove:
 	{
 		int index;
 		while (true)
@@ -79,11 +78,28 @@ void handleChoice(AnimeStore& store, int choice)
 		clearScreen();
 		break;
 	}
-	case 5:
+	case MenuChoice::Backup:
 		store.backup();
 		clearScreen();
 		break;
-
+	case MenuChoice::Reset:
+		cout << "重置仪式启动，备份模块运行（y/n）：";
+		char confirm;
+		cin >> confirm;
+		cin.ignore();
+		if (confirm == 'y' || confirm == 'Y')
+		{
+			store.backup();
+			store.reset();
+			cout << "馆藏已重置" << endl;
+		}
+		else
+		{
+			cout << "已取消" << endl;
+		}
+		cin.get();
+		clearScreen();
+		break;
 	default:
 		cout << "无效，重来" << endl;
 		cin.get();
