@@ -1,6 +1,7 @@
 ﻿#include "UI.h"
 #include <iostream>
 #include <sstream>
+#include<string>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ void showMenu()
 	cout << "———————————————————————————————————" << endl;
 }
 
-void handleChoice(AnimeStore &store, MenuChoice choice)
+void handleChoice(AnimeStore& store, MenuChoice choice)
 {
 	switch (choice)
 	{
@@ -77,7 +78,6 @@ void handleChoice(AnimeStore &store, MenuChoice choice)
 				clearScreen();
 			}
 		}
-		break;
 	}
 
 	case MenuChoice::Backup:

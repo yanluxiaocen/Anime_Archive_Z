@@ -14,7 +14,6 @@ public:
 	const std::string& getAuthor() const;
 	const std::string& getDescription() const;
 	float getRate() const;
-	void setRate(float rate);
 	void print() const;
 	void printSimple() const;
 };

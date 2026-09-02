@@ -28,17 +28,6 @@ float Anime::getRate() const
 	return m_rate;
 }
 
-void Anime::setRate(float rate)
-{
-	if (rate >= 0.0f && rate <= 10.0f)
-		m_rate = rate;
-	else
-	{
-		std::cout << "啥杯，看不懂人话么？" << std::endl;
-		m_rate = 0.0f;
-	}
-}
-
 void Anime::print() const
 {
 	using std::cout;
