@@ -2,9 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <cstdio>
+#include <sstream>
 
-AnimeStore::AnimeStore(const std::string& filename) : m_filename(filename)
+AnimeStore::AnimeStore(const std::string &filename) : m_filename(filename)
 {
 	loadFromFile();
 }
@@ -25,17 +25,17 @@ void AnimeStore::add()
 	getline(cin, name);
 	cout << "作者：";
 	getline(cin, author);
-	while (true) {
+	while (true)
+	{
 		cout << "评分：";
-		cin >> rate;
-		if (cin.fail())
+		std::string line;
+		std::getline(cin, line);
+		std::istringstream iss(line);
+		if (!(iss >> rate) || !(iss >> std::ws).eof())
 		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "无效，重来" << std::endl;
 			continue;
 		}
-		cin.ignore();
 		if (rate >= 0.0f && rate <= 10.0f)
 			break;
 		cout << "范围错误，重来" << std::endl;
@@ -52,7 +52,8 @@ void AnimeStore::remove(int index)
 	m_animes.erase(m_animes.begin() + index);
 }
 
-void AnimeStore::reset() {
+void AnimeStore::reset()
+{
 	m_animes.clear();
 }
 
@@ -61,11 +62,11 @@ void AnimeStore::showAll() const
 	using std::cout;
 	using std::endl;
 	cout << "动漫列表" << endl
-		<< "------------------------" << endl;
+		 << "------------------------" << endl;
 	if (getCount())
 	{
 		int index = 1;
-		for (const auto& anime : m_animes)
+		for (const auto &anime : m_animes)
 		{
 			cout << index << ". ";
 			index++;
@@ -74,7 +75,7 @@ void AnimeStore::showAll() const
 	}
 	else
 		cout << "空" << endl
-		<< "------------------------" << endl;
+			 << "------------------------" << endl;
 }
 void AnimeStore::showSimple() const
 {
@@ -83,7 +84,7 @@ void AnimeStore::showSimple() const
 	if (getCount())
 	{
 		int index = 1;
-		for (const auto& anime : m_animes)
+		for (const auto &anime : m_animes)
 		{
 			cout << index << ". ";
 			index++;
@@ -100,16 +101,16 @@ void AnimeStore::showRank() const
 	using std::endl;
 
 	cout << "动漫排行" << endl
-		<< "------------------------" << endl;
+		 << "------------------------" << endl;
 	if (getCount())
 	{
 		auto sorted = m_animes;
 
-		std::sort(sorted.begin(), sorted.end(), [](const Anime& a, const Anime& b)
-			{ return a.getRate() > b.getRate(); });
+		std::sort(sorted.begin(), sorted.end(), [](const Anime &a, const Anime &b)
+				  { return a.getRate() > b.getRate(); });
 
 		int index = 1;
-		for (const auto& anime : sorted)
+		for (const auto &anime : sorted)
 		{
 			cout << index << ". ";
 			index++;
@@ -118,7 +119,7 @@ void AnimeStore::showRank() const
 	}
 	else
 		cout << "空" << endl
-		<< "------------------------" << endl;
+			 << "------------------------" << endl;
 }
 
 void AnimeStore::loadFromFile()
@@ -130,9 +131,9 @@ void AnimeStore::loadFromFile()
 	std::string name, author, description;
 	float rate;
 	while (std::getline(fin, name) &&
-		std::getline(fin, author) &&
-		std::getline(fin, description) &&
-		(fin >> rate))
+		   std::getline(fin, author) &&
+		   std::getline(fin, description) &&
+		   (fin >> rate))
 	{
 		fin.ignore();
 		m_animes.push_back(Anime(name, author, description, rate));
@@ -145,18 +146,19 @@ bool AnimeStore::saveToFile() const
 	if (!fout.is_open())
 		return false;
 
-	for (const auto& anime : m_animes)
+	for (const auto &anime : m_animes)
 	{
 		fout << anime.getName() << "\n"
-			<< anime.getAuthor() << "\n"
-			<< anime.getDescription() << "\n"
-			<< anime.getRate() << "\n";
+			 << anime.getAuthor() << "\n"
+			 << anime.getDescription() << "\n"
+			 << anime.getRate() << "\n";
 	}
 	return fout.good();
 }
 
-bool AnimeStore::backup() const {
-	std::ifstream src(m_filename, std::ios::binary);//以二进制模式打开
+bool AnimeStore::backup() const
+{
+	std::ifstream src(m_filename, std::ios::binary); // 以二进制模式打开
 	if (!src.is_open())
 		return false;
 

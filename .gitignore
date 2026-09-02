@@ -10,3 +10,7 @@ Debug/
 Release/
 .cph/
 x64/
+
+# 运行时数据文件（各机器独立，不提交）
+Anime.txt
+*.bak

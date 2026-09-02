@@ -12,7 +12,7 @@
         "-g",
         "${fileDirname}\\*.cpp",
         "-o",
-        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        "${fileDirname}\\Anime_Archive_Z.exe"
       ],
       "group": {
         "kind": "build",

@@ -5,6 +5,14 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
+      "excludePath": [
+        "**/x64/**",
+        "**/Debug/**",
+        "**/Release/**",
+        "**/.git/**",
+        "**/.cph/**",
+        "**/build/**"
+      ],
       "compilerPath": "D:/Tool/VSCode/mingw64/bin/gcc.exe",
       "cStandard": "c17",
       "cppStandard": "c++17",

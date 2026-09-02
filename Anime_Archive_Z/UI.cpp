@@ -1,5 +1,6 @@
 ﻿#include "UI.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ void showMenu()
 	cout << "———————————————————————————————————" << endl;
 }
 
-void handleChoice(AnimeStore& store, MenuChoice choice)
+void handleChoice(AnimeStore &store, MenuChoice choice)
 {
 	switch (choice)
 	{
@@ -44,12 +45,11 @@ void handleChoice(AnimeStore& store, MenuChoice choice)
 			store.showSimple();
 			cout << "------------------------" << endl;
 			cout << "抹去：";
-			cin >> index;
-
-			if (cin.fail())
+			string line;
+			getline(cin, line);
+			istringstream iss(line);
+			if (!(iss >> index) || !(iss >> std::ws).eof())
 			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "无效输入，请重新输入" << endl;
 				cin.get();
 				clearScreen();
@@ -62,10 +62,12 @@ void handleChoice(AnimeStore& store, MenuChoice choice)
 				return;
 			}
 
-			cin.ignore();
 			if (index >= 1 && index <= store.getCount())
 			{
 				store.remove(index - 1);
+				cout << "已删除" << endl;
+
+				cin.get();
 				clearScreen();
 			}
 			else
@@ -75,9 +77,9 @@ void handleChoice(AnimeStore& store, MenuChoice choice)
 				clearScreen();
 			}
 		}
-		clearScreen();
 		break;
 	}
+
 	case MenuChoice::Backup:
 		store.backup();
 		clearScreen();
