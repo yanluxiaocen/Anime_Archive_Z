@@ -1,8 +1,8 @@
-{
+﻿{
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "C/C++: g++.exe 生成活动文件",
+      "label": "g++ 构建 Anime_Archive_Z",
       "type": "shell",
       "command": "D:/Tool/VSCode/mingw64/bin/g++.exe",
       "args": [
@@ -10,18 +10,20 @@
         "-fexec-charset=UTF-8",
         "-fdiagnostics-color=always",
         "-g",
-        "${fileDirname}\\*.cpp",
+        "-I${workspaceFolder}/include",
+        "${workspaceFolder}/src/main.cpp",
+        "${workspaceFolder}/src/Anime.cpp",
+        "${workspaceFolder}/src/AnimeStore.cpp",
+        "${workspaceFolder}/src/UI.cpp",
         "-o",
-        "${fileDirname}\\Anime_Archive_Z.exe"
+        "${workspaceFolder}/Anime_Archive_Z.exe"
       ],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": [
-        "$gcc"
-      ],
-      "detail": "调试器生成的任务。"
+      "problemMatcher": [ "$gcc" ],
+      "detail": "显式列出源文件，输出到仓库根（*.exe 已被 gitignore）"
     }
   ]
 }
