@@ -33,10 +33,10 @@
 - [x] 命令行 CMake 构建跑通（VS 17 2022 生成器 → build\Debug\Anime_Archive_Z.exe），冒烟通过
 - [x] .vscode tasks/launch 更新到新布局（显式源文件列表 + -I include）
 - [x] 重构提交 2501c85 已推送
+- [x] **VS Code 机目录上移同步**：仓库根从嵌套 Anime_Archive_Z\Anime_Archive_Z 上移到第一层 Anime_Archive_Z（与 Snack 同级）；删除 VS Code 自动生成的孤立 .vscode 与旧残留目录；新布局 F5 冒烟通过（src/main.cpp，exe 输出到仓库根）
 
 ### 待办（下次按顺序）
 - [ ] VS GUI CMake 解锁：配好 CMakePresets.json + cmakeUserPresets.json（本机 ucrt 补丁，后者不进 git）
-- [ ] VS Code 机 pull 后验证新布局（打开新仓库根 Memory\Anime_Archive_Z，src 里 F5）
 - [ ] 工程化剩余：单元测试 doctest（给 Anime/AnimeStore 写用例 + 接 ctest）→ README + 截图
 - [ ] 可选加分：Qt + SQLite 桌面版（约 10–15h）
 
@@ -57,6 +57,7 @@
 - 共享预设 CMakePresets.json 进 git；本机私有 cmakeUserPresets.json 不进 git（VS Code 机 MinGW 不受 E 盘路径影响）
 - 菜单不显示"0.退出"：功能在，隐藏指令式退出（本人决定）
 - 本机 push GitHub 也依赖 Steam++ 加速（与 VS Code 机同网络规律）
+- git 不同步文件夹位置：另一台把仓库目录"上移"后，本台 pull 只更新内容、.git 仍在原嵌套层 → 需手动执行同样的目录移动；两机仓库根统一在第一层（与 Snack 同级）
 
 ## 踩坑库（教科书级，反复看）
 1. C++11 起：数值提取失败时，目标变量被写成 0（int/float 都是，不是保持不变）
@@ -73,6 +74,8 @@
 12. vcvars 生成的 LIB/INCLUDE 缺 ucrt 组件 → 链接报 LNK1104 找不到 ucrtd.lib；临时解法：手动 set INCLUDE/LIB 补 ucrt 路径，根治靠 VS Installer 修复 SDK
 13. 本机 push GitHub 也要先开 Steam++：浏览器能开 ≠ git 能连（浏览器走 DoH 绕过污染 DNS，git 走系统 DNS）
 14. cmake 不在普通 PowerShell 的 PATH：要用 x64 Native Tools 环境或完整路径调用
+15. git push/pull 只同步仓库内容、不搬运文件夹位置：笔记本上把仓库目录"上移一层"后，另一台 pull 后 .git 仍在旧嵌套层 → 要手动移动目录，布局才会一致
+16. 在没有 .vscode 的文件夹按 F5，VS Code 自动生成默认单文件任务（编译 ${file}、无 -I include）→ 多文件项目报 "UI.h: No such file or directory"；务必在仓库根打开文件夹（那里才有正确的 tasks.json）
 
 ## 常用命令备忘
 - 结束一天：AI 助手更新本文件 → git add PROJECT_NOTES.md → git commit -m "docs: 更新项目日志" → git push
