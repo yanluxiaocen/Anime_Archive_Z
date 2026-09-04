@@ -8,6 +8,7 @@
 ## 协作约定
 - VS2022 主力机 + VS Code 外出机 经 GitHub 协作，远程已统一为 HTTPS。
 - 所有代码改动由本人亲自完成，AI 助手只负责指路、审查与解释。
+- 例外：PROJECT_NOTES.md 由 AI 助手直接编写维护（本人负责提交推送）。
 - 调试以实际运行为准，不盲信任何"口头诊断"。
 
 ## 当前状态（今天更新）
@@ -26,11 +27,17 @@
 - [x] 数据文件退出版本控制：.gitignore 忽略 Anime.txt/*.bak 并解跟踪（两机数据各自独立，不再 pull 冲突）
 - [x] P2 三件套：getters 返回 const&、构造初始化列表顺序、include 瘦身（cstdio 已删）
 - [x] VS Code 用户设置：files.encoding=utf8 显式化；[cpp]/[c] 保存不自动格式化（防 clang-format 默认风格重排 Tab 代码）
+- [x] 全量回归测试通过：输入校验（0abc/3.5abc 拒绝、删除 0 退出）/ 重置馆藏 / enum class 菜单
+- [x] 目录拍平：仓库根上移一层到 Memory\Anime_Archive_Z（与 Snack 同级），src/ + include/ 布局
+- [x] 退役 .sln/.vcxproj，接入 CMake（CMakeLists.txt：C++17 + /utf-8 + src/include）
+- [x] 命令行 CMake 构建跑通（VS 17 2022 生成器 → build\Debug\Anime_Archive_Z.exe），冒烟通过
+- [x] .vscode tasks/launch 更新到新布局（显式源文件列表 + -I include）
+- [x] 重构提交 2501c85 已推送
 
 ### 待办（下次按顺序）
-- [ ] 菜单文案补"0.退出"（功能早已有，文案搁置中——之前日志误记为已完成，实际未补）
-- [ ] 全量回归测试：输入校验（0abc/3.5abc 全拒绝、删除 0 退出、连续删除）/ 重置馆藏 / enum class 菜单
-- [ ] 工程化（预估 5–6h，分 2–3 周）：目录整理（三层同名嵌套 Anime_Archive_Z/Anime_Archive_Z/Anime_Archive_Z）→ CMake（全新领域，重头）→ 单元测试 doctest → README+截图
+- [ ] VS GUI CMake 解锁：配好 CMakePresets.json + cmakeUserPresets.json（本机 ucrt 补丁，后者不进 git）
+- [ ] VS Code 机 pull 后验证新布局（打开新仓库根 Memory\Anime_Archive_Z，src 里 F5）
+- [ ] 工程化剩余：单元测试 doctest（给 Anime/AnimeStore 写用例 + 接 ctest）→ README + 截图
 - [ ] 可选加分：Qt + SQLite 桌面版（约 10–15h）
 
 ## 关键决定记录
@@ -45,6 +52,11 @@
 - VS Code 调试输出固定 exe 名：tasks 默认模板用 ${fileBasenameNoExtension} 命名，在哪个文件按 F5 就生成同名 exe；多文件项目应固定为 main 文件名
 - 数据文件 Anime.txt/*.bak 不提交：运行时产物，两机数据独立，提交会导致 pull 冲突
 - 源码编码统一 UTF-8
+- 仓库根上移一层到 Memory\Anime_Archive_Z（与 Snack 同级）；多账户机器加 git safe.directory 白名单
+- src/include + CMakeLists.txt 取代 sln/vcxproj；构建产物 build/ 已 gitignore
+- 共享预设 CMakePresets.json 进 git；本机私有 cmakeUserPresets.json 不进 git（VS Code 机 MinGW 不受 E 盘路径影响）
+- 菜单不显示"0.退出"：功能在，隐藏指令式退出（本人决定）
+- 本机 push GitHub 也依赖 Steam++ 加速（与 VS Code 机同网络规律）
 
 ## 踩坑库（教科书级，反复看）
 1. C++11 起：数值提取失败时，目标变量被写成 0（int/float 都是，不是保持不变）
@@ -58,7 +70,11 @@
 9. OpenSSL 报 "unable to get local issuer certificate (20)" → 换 `http.sslBackend schannel`（用 Windows 证书库）
 10. PowerShell `Get-Content` 默认按 GBK 读 UTF-8 无 BOM 文件 → 校验 JSON 误报 invalid，加 `-Encoding UTF8`
 11. VS Code "生成活动文件"任务：输出 `${fileBasenameNoExtension}.exe` 会在每个源文件按 F5 时生成同名 exe（内容相同全是完整程序），多文件项目应固定为 main 文件名
+12. vcvars 生成的 LIB/INCLUDE 缺 ucrt 组件 → 链接报 LNK1104 找不到 ucrtd.lib；临时解法：手动 set INCLUDE/LIB 补 ucrt 路径，根治靠 VS Installer 修复 SDK
+13. 本机 push GitHub 也要先开 Steam++：浏览器能开 ≠ git 能连（浏览器走 DoH 绕过污染 DNS，git 走系统 DNS）
+14. cmake 不在普通 PowerShell 的 PATH：要用 x64 Native Tools 环境或完整路径调用
 
 ## 常用命令备忘
-- 结束一天：更新本文件 → git add PROJECT_NOTES.md → git commit -m "docs: 更新项目日志" → git push
-- VS Code 机推送前：先开 Steam++ GitHub 加速（网络钥匙，关了就超时）
+- 结束一天：AI 助手更新本文件 → git add PROJECT_NOTES.md → git commit -m "docs: 更新项目日志" → git push
+- 推送 GitHub 前（两台机都一样）：先开 Steam++ 加速（网络钥匙，关了就超时/重置）
+- 本机命令行构建：x64 Native Tools 里 set INCLUDE/LIB（ucrt 两行）→ cmake -S . -B build → cmake --build build --config Debug
