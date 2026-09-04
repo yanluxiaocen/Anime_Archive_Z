@@ -34,9 +34,9 @@
 - [x] .vscode tasks/launch 更新到新布局（显式源文件列表 + -I include）
 - [x] 重构提交 2501c85 已推送
 - [x] **VS Code 机目录上移同步**：仓库根从嵌套 Anime_Archive_Z\Anime_Archive_Z 上移到第一层 Anime_Archive_Z（与 Snack 同级）；删除 VS Code 自动生成的孤立 .vscode 与旧残留目录；新布局 F5 冒烟通过（src/main.cpp，exe 输出到仓库根）
+- [x] VS GUI CMake 解锁：CMakePresets.json（共享）+ cmakeUserPresets.json（本机 ucrt 补丁）配置完成，VS 图形界面构建通过
 
 ### 待办（下次按顺序）
-- [ ] VS GUI CMake 解锁：配好 CMakePresets.json + cmakeUserPresets.json（本机 ucrt 补丁，后者不进 git）
 - [ ] 工程化剩余：单元测试 doctest（给 Anime/AnimeStore 写用例 + 接 ctest）→ README + 截图
 - [ ] 可选加分：Qt + SQLite 桌面版（约 10–15h）
 
