@@ -12,6 +12,7 @@ private:
 public:
 	AnimeStore(const std::string& filename);
 	int getCount() const;
+	const Anime& getAt(int index) const;
 
 	void add();
 	void remove(int index);

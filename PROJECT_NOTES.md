@@ -35,9 +35,12 @@
 - [x] 重构提交 2501c85 已推送
 - [x] **VS Code 机目录上移同步**：仓库根从嵌套 Anime_Archive_Z\Anime_Archive_Z 上移到第一层 Anime_Archive_Z（与 Snack 同级）；删除 VS Code 自动生成的孤立 .vscode 与旧残留目录；新布局 F5 冒烟通过（src/main.cpp，exe 输出到仓库根）
 - [x] VS GUI CMake 解锁：CMakePresets.json（共享）+ cmakeUserPresets.json（本机 ucrt 补丁）配置完成，VS 图形界面构建通过
+- [x] 概念课结业 + toy CMakeLists 从零练习过关（拼写/路径/命令参数坑全自修）
+- [x] doctest 单元测试接入：9 用例 17 断言全绿（Anime 钳制/getters；AnimeStore 往返/remove/reset/越界抛异常）
+- [x] AnimeStore 新增只读访问口 getAt(int)（用 vector::at，越界抛异常；测试驱动 API 设计）
 
 ### 待办（下次按顺序）
-- [ ] 工程化剩余：单元测试 doctest（给 Anime/AnimeStore 写用例 + 接 ctest）→ README + 截图
+- [ ] 工程化收尾：README + 截图（简介/构建步骤/功能展示，简历直接引用）
 - [ ] 可选加分：Qt + SQLite 桌面版（约 10–15h）
 
 ## 关键决定记录
@@ -76,6 +79,43 @@
 14. cmake 不在普通 PowerShell 的 PATH：要用 x64 Native Tools 环境或完整路径调用
 15. git push/pull 只同步仓库内容、不搬运文件夹位置：笔记本上把仓库目录"上移一层"后，另一台 pull 后 .git 仍在旧嵌套层 → 要手动移动目录，布局才会一致
 16. 在没有 .vscode 的文件夹按 F5，VS Code 自动生成默认单文件任务（编译 ${file}、无 -I include）→ 多文件项目报 "UI.h: No such file or directory"；务必在仓库根打开文件夹（那里才有正确的 tasks.json）
+17. doctest 链接报一堆 "doctest:: 符号未解析" + "main 未解析" → 查两处：① test_main.cpp 是否还列在 add_executable(unit_tests ...) 里（被误删过）② 它是否含 DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+18. float 断言别用 ==：用 doctest::Approx（浮点比较有精度问题）
+19. 测试必须自建数据自清理（std::remove 临时文件），绝不碰真实数据文件
+
+## 命令行速查表（遇到不懂先查这里）
+**通用规则**：命令 = `程序 + 参数 + 操作对象`；每条命令都自带帮助，加 `--help` 就能看用法。
+**窗口选择**：带 `cmake` 的 → x64 Native Tools；其余 → 普通 PowerShell。
+
+### 导航（哪个窗口都能用）
+- `cd 路径` —— 进入目录（PowerShell）；cmd 跨盘符要 `cd /d 路径`
+- `pwd` —— 看当前在哪个目录（cmd 里是 `cd` 回车）
+- `Get-ChildItem 路径` —— 列出文件（`ls` 也行）
+
+### git（【普通 PowerShell】）
+- `git status` —— 工作区状态：改了什么、有没有未提交
+- `git add 文件或目录` → `git commit -m "说明"` → `git push`（推送前先开 Steam++）
+- `git pull` —— 拉取远端更新
+
+### cmake（【x64 Native Tools 窗口】）
+- `cmake -S . -B build` —— 配置（读 CMakeLists 生成施工图）
+- `cmake --build build --config Debug` —— 构建（编出 exe）
+- 本机特供：跑 cmake 前先 `set INCLUDE=E:\Windows Kits\10\Include\10.0.26100.0\ucrt;%INCLUDE%` 和 `set LIB=...\ucrt\x64;%LIB%`（补 ucrt）
+
+### 文件操作（PowerShell）
+- `Set-Content 路径 -Value 内容` —— 写文件；多行内容用 `@'` 开头 `'@` 结尾
+- `Rename-Item 旧名 新名` —— 改名
+- `Remove-Item 路径 -Recurse -Force` —— 删目录（-Recurse 递归 -Force 强删）
+- `Test-Path 路径` —— 检查文件/目录是否存在
+
+### 运行程序
+- PowerShell：`.\build\Debug\unit_tests.exe`（要 `.\` 前缀）
+- cmd：`build\Debug\unit_tests.exe`（不用 `.\`）
+
+### PowerShell vs cmd 的区别（踩坑无数，必须分清）
+- 提示符 `PS C:\>` = PowerShell；`C:\>` = cmd；窗口标题写着 "x64 Native Tools" 的是特殊 cmd
+- `#` 注释、`$变量`、`Get-ChildItem`/`Remove-Item`/`Set-Content` 只有 PowerShell 认；`set` 只有 cmd 认
+- cmake 命令只在 Native Tools 窗口可用（普通窗口会报"不是内部或外部命令"）
 
 ## 常用命令备忘
 - 结束一天：AI 助手更新本文件 → git add PROJECT_NOTES.md → git commit -m "docs: 更新项目日志" → git push

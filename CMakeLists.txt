@@ -31,6 +31,7 @@ enable_testing()
 add_executable(unit_tests
     tests/test_main.cpp
     tests/test_anime.cpp
+    tests/test_anime_store.cpp
     src/Anime.cpp
     src/AnimeStore.cpp
 )
